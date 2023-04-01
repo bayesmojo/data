@@ -1,0 +1,551 @@
+\batchmode
+\makeatletter
+\def\input@path{{C:/Users/bayes/Desktop/TKU/Applied_Statistical_Analysis/}}
+\makeatother
+\documentclass[12pt,oneside,english,american,flalign]{book}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\renewcommand{\familydefault}{\rmdefault}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\setlength{\parindent}{0.5in}
+\usepackage{amsmath}
+\usepackage{stackrel}
+\usepackage{setspace}
+\doublespacing
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\date{}
+\usepackage{times}
+
+\renewcommand{\familydefault}{\rmdefault}
+
+
+
+\renewcommand\chaptermark[1]{\markboth{#1}{}} 
+
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\ #1}}{}}
+%\renewcommand{\headrulewidth}{0pt} 
+\usepackage{amsthm}\usepackage{graphics}%\usepackege{bm}
+
+\bibliographystyle{apalike}
+%\numberwithin{equation}{chapter}
+\usepackage{babel}
+\usepackage{titlesec}\newcommand{\chapterbreak}{\clearpage} 
+%%%%%%%%%%%%%
+
+\titleformat{\chapter}{\centering\LARGE\bfseries}{\chaptertitlename\ \thechapter}{0.7em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{50pt}
+
+  
+\titleformat{\section}{\large\bfseries}{\thesection}{0.7em}{}
+\titlespacing*{\section}{0pt}{12pt}{0pt}
+
+\usepackage{indentfirst}
+\usepackage{mathtools}
+\usepackage[fontsize=16]{scrextend}
+
+\usepackage{fancyhdr}
+\fancyhf{}% Clear header footer
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage} 
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\makeatother
+
+\usepackage{babel}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\begin{doublespace}
+
+\rfoot{M0653 APPLIED STATS}
+\end{doublespace}
+\begin{doublespace}
+
+\lfoot{\textrm{\copyright}\ 2023\ MTC}
+\end{doublespace}
+
+\setcounter{chapter}{1}
+
+\chapter*{{\Huge{}Lecture Notes for M0653}{\LARGE{}}\protect \linebreak{}
+{\Huge{}Applied Statistical Analysis}{\LARGE{}}\protect \linebreak{}
+{\LARGE{}Chapter 1 Factorials and the Gamma Function}}
+
+\noindent I hope my lecture notes are insightful enough to guide you
+through the fundamental theories of statistical inference. As I\textquoteright ve
+mentioned in some of my lectures, this type of theory-based insight
+leaves me more comfortable using statistics in practice. I hope you
+enjoy reading them as much as I enjoy preparing them. Let's begin
+with Euler, the master of us all.
+\noindent \begin{center}
+``\textit{Read Euler, read Euler, he is the master of us all}.''
+\par\end{center}
+
+\noindent \begin{flushright}
+Pierre-Simon Laplace (1749--1827)
+\par\end{flushright}
+
+\section{Factorials}
+
+\noindent In our statistics course, I mentioned 
+\[
+\underset{n\rightarrow\infty}{\textrm{lim}}\thinspace\underset{=\frac{n!}{\left(n-x\right)!x!}p^{x}q^{n-x}}{\underbrace{binomial\left(n,p\right)}}=N\left(np,npq\right).
+\]
+To show this result, we need to expand those factorials above. This
+is the motivation for studying factorials in this section.
+
+\begin{doublespace}
+\noindent \textbf{Lab: Binomial approximation to Normal}
+\end{doublespace}
+
+\selectlanguage{english}%
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{rm}\hlstd{(}\hlkwc{list}\hlstd{=}\hlkwd{ls}\hlstd{())}
+
+\hlstd{n} \hlkwb{=} \hlnum{100}
+\hlstd{x} \hlkwb{=} \hlnum{0}\hlopt{:}\hlstd{n}
+\hlstd{y} \hlkwb{=} \hlkwd{dbinom}\hlstd{(x,} \hlkwc{size}\hlstd{=n,} \hlkwc{prob}\hlstd{=}\hlnum{0.5}\hlstd{)}
+\hlkwd{plot}\hlstd{(x, y,} \hlkwc{ylab}\hlstd{=}\hlstr{"dbinom (x)"}\hlstd{,} \hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{30}\hlstd{,} \hlnum{70}\hlstd{),} \hlkwc{type}\hlstd{=}\hlstr{"h"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-1-1} 
+
+\end{knitrout}
+\selectlanguage{american}%
+
+\section{\label{subsec:Factorials-and-Gamma}Gamma Function}
+
+\noindent Suppose $X\sim binom\left(n,\theta\right)$. The pmf of
+$X$ is $p\left(x|\theta\right)=\binom{n}{x}\theta^{x}\left(1-\theta\right)^{n-x}$,
+where $\theta$ is the parameter (probability of a head). Suppose
+our interest now is in $\theta$. Treating $\theta$ as a random variable,
+we are interested in the probability distribution of $\theta$. Based
+on the pmf of $X$, the pdf of $\theta$ can be expressed by the following
+form,
+\[
+f\left(\theta|a,b\right)=k\theta^{a}\left(1-\theta\right)^{b}
+\]
+for $0\leq\theta\leq1$, where $a>0$ and $b>0$ are two parameters.
+
+In order for $f\left(\theta\right)$ to be a valid pdf, $k$ must
+be $\frac{1}{\int_{0}^{1}\theta^{a}\left(1-\theta\right)^{b}d\theta}$,
+such that
+\begin{align*}
+\int_{0}^{1}f\left(\theta\right)d\theta & =\int_{0}^{1}k\theta^{a}\left(1-\theta\right)^{b}d\theta\\
+ & =k\int_{0}^{1}\theta^{a}\left(1-\theta\right)^{b}d\theta\\
+ & =1
+\end{align*}
+The integral in the denominator of $k$, 
+\[
+\int_{0}^{1}\theta^{a}\left(1-\theta\right)^{b}d\theta,
+\]
+is called the Euler integral of the first kind. This integral is also
+known as the beta function, denoted $B\left(a+1,b+1\right)$.
+
+Inspired by the Wallis Product, 
+\[
+\stackrel[i=1]{\infty}{\prod}\frac{2i}{2i-1}\cdot\frac{2i}{2i+1}=\frac{2}{1}\cdot\frac{2}{3}\cdot\frac{4}{3}\cdot\frac{4}{5}\cdot\frac{6}{5}\cdot\frac{6}{7}\cdots=\frac{\pi}{2},
+\]
+Euler presumed that $n!$ could be represented by some integral (where
+there is $\pi$, there is integral). Experimenting with infinite products
+of numbers, Euler speculated the above beta function (using different
+notations here),
+\[
+J\left(r,n\right)=\int_{0}^{1}x^{r}\left(1-x\right)^{n}dx.
+\]
+
+\noindent Using integration by parts repeatedly, it is not difficult
+to find 
+\[
+J\left(r,n\right)=\int_{0}^{1}x^{r}\left(1-x\right)^{n}dx=\frac{\left(1\right)\left(2\right)\cdots\left(n\right)}{\left(r+1\right)\left(r+2\right)\cdots\left(r+n+1\right)}.
+\]
+Let $r=\frac{f}{g}$, and we have 
+\begin{align*}
+\int_{0}^{1}x^{\frac{f}{g}}\left(1-x\right)^{n}dx & =\frac{n!}{\left(\frac{f}{g}+1\right)\left(\frac{f}{g}+2\right)\cdots\left(\frac{f}{g}+n+1\right)}\\
+ & =\frac{n!}{\left(\frac{f+g}{g}\right)\left(\frac{f+2g}{g}\right)\cdots\left(\frac{f+ng}{g}\right)\left(\frac{f+\left(n+1\right)g}{g}\right)}\\
+ & =\frac{n!}{\frac{\left(f+g\right)\left(f+2g\right)\cdots\left(f+ng\right)\left(f+\left(n+1\right)g\right)}{g^{n+1}}},
+\end{align*}
+which suggests
+\begin{equation}
+\frac{n!}{\left(f+g\right)\left(f+2g\right)\cdots\left(f+ng\right)}=\frac{f+\left(n+1\right)g}{g^{n+1}}\int_{0}^{1}x^{\frac{f}{g}}\left(1-x\right)^{n}dx.\label{eq:1-1}
+\end{equation}
+Let $h=\frac{g}{f+g}$ and also let $x=t^{h}\Rightarrow dx=ht^{h-1}dt$.
+The right-hand side of equation (\ref{eq:1-1}) becomes
+\begin{align*}
+\frac{f+\left(n+1\right)g}{g^{n+1}}\int_{0}^{1}x^{\frac{f}{g}}\left(1-x\right)^{n}dx & =\frac{f+\left(n+1\right)g}{g^{n+1}}\int_{0}^{1}\left(t^{h}\right)^{\frac{f}{g}}\left(1-t^{h}\right)^{n}ht^{h-1}dt\\
+\left(h\frac{f}{g}+h-1=0\right) & =\frac{f+\left(n+1\right)g}{g^{n+1}}\int_{0}^{1}t^{h\frac{f}{g}+h-1}\left(1-t^{h}\right)^{n}hdt\\
+ & =\frac{f+\left(n+1\right)g}{g^{n+1}}\int_{0}^{1}h\left(1-t^{h}\right)^{n}dt\\
+ & =\frac{f+\left(n+1\right)g}{g^{n+1}}h^{n+1}\int_{0}^{1}\left(\frac{1-t^{h}}{h}\right)^{n}dt\\
+ & =\frac{f+\left(n+1\right)g}{g^{n+1}}\left(\frac{g}{f+g}\right)^{n+1}\int_{0}^{1}\left(\frac{1-t^{h}}{h}\right)^{n}dt\\
+ & =\frac{f+\left(n+1\right)g}{\left(f+g\right)^{n+1}}\int_{0}^{1}\left(\frac{1-t^{h}}{h}\right)^{n}dt.
+\end{align*}
+Equation (\ref{eq:1-1}) now becomes 
+\begin{equation}
+\frac{n!}{\left(f+g\right)\left(f+2g\right)\cdots\left(f+ng\right)}=\frac{f+\left(n+1\right)g}{\left(f+g\right)^{n+1}}\int_{0}^{1}\left(\frac{1-t^{h}}{h}\right)^{n}dt.\label{eq:1-1-1}
+\end{equation}
+
+\noindent Let $f\rightarrow1$ and $g\rightarrow0$. The left-hand
+side of equation (\ref{eq:1-1-1}) becomes $n!$. For the right-hand
+side of equation (\ref{eq:1-1-1}), as $h=\frac{g}{f+g}\rightarrow0$,
+we have $\frac{1-t^{h}}{h}\rightarrow\frac{0}{0}$. Applying L'Hospital's
+rule, we get $\underset{h\rightarrow0}{\textrm{lim}}\frac{1-t^{h}}{h}=-\textrm{log}t$.
+With the above derivation, we figured 
+\[
+n!=\int_{0}^{1}\left(-\textrm{log}t\right)^{n}dt.
+\]
+Let $t=e^{-x}$, and we finally obtain
+
+\noindent 
+\[
+n!=\int_{0}^{\infty}x^{n}e^{-x}dx,
+\]
+where $n\neq-1,-2,-3,\cdots$ (excluding negative integers). 
+
+This result can be justified using integration by parts. The formula
+for integration by parts is
+\[
+\int u\left(x\right)v^{\prime}\left(x\right)dx=u\left(x\right)v\left(x\right)-\int u^{\prime}\left(x\right)v\left(x\right)dx.
+\]
+We thus have 
+\begin{equation}
+\int_{0}^{\infty}x^{n}e^{-x}dx=\left[x^{n}\cdot-e^{-x}\right]_{0}^{\infty}+n\int_{0}^{\infty}x^{n-1}e^{-x}dx.\label{eq:1}
+\end{equation}
+In the right-hand side of equation (\ref{eq:1}), we note that the
+first term is $\left[x^{n}\cdot-e^{-x}\right]_{0}^{\infty}=0$, which
+can be found by keeping applying L\textquoteright Hospital\textquoteright s
+rule:
+\[
+\underset{x\rightarrow\infty}{\textrm{lim}}\frac{x^{n}}{e^{x}}=\underset{x\rightarrow\infty}{\textrm{lim}}\frac{nx^{n-1}}{e^{x}}=\cdots=\underset{x\rightarrow\infty}{\textrm{lim}}\frac{n!}{e^{x}}=0
+\]
+The second term can be integrated by parts to yield a similar expression.
+Continue the process, and we can find
+
+\noindent 
+\begin{equation}
+\int_{0}^{\infty}x^{n}e^{-x}dx=n!.\label{eq:2}
+\end{equation}
+Based on equation (\ref{eq:2}), Euler defines the gamma function
+as $\Gamma\left(n\right)=\int_{0}^{\infty}x^{n-1}e^{-x}dx$, which
+is also known as the Euler integral of the second kind. As can be
+seen, 
+\[
+\Gamma\left(n\right)=\left(n-1\right)!
+\]
+and $\Gamma\left(n+1\right)=n!$. Consequently, we have the following
+recurrence formula, $\Gamma\left(n+1\right)=n\Gamma\left(n\right)$.
+A possible reason that the gamma function is off by 1 from the factorial
+is that the beta function can be succinctly expressed by
+\[
+B\left(a,b\right)=\frac{\Gamma\left(a\right)\Gamma\left(b\right)}{\Gamma\left(a+b\right)}.
+\]
+
+It should be noted that $n$ is not necessarily an integer. For example,
+when $n=\frac{1}{2}$, 
+\begin{align*}
+\Gamma\left(\frac{1}{2}\right) & =\int_{0}^{\infty}x^{\frac{1}{2}-1}e^{-x}dx\\
+ & =\int_{0}^{\infty}\frac{e^{-x}}{\sqrt{x}}dx.
+\end{align*}
+Let $w=\sqrt{x}$, and then $dw=\frac{dx}{2\sqrt{x}}\Rightarrow\frac{dx}{\sqrt{x}}=2dw$.
+Therefore, 
+\begin{align*}
+\Gamma\left(\frac{1}{2}\right) & =\int_{0}^{\infty}\frac{e^{-x}}{\sqrt{x}}dx\\
+ & =2\int_{0}^{\infty}e^{-w^{2}}dw.
+\end{align*}
+
+The above integral (aka Gaussian integral) was tackled by Laplace
+using the following method. Let $I=\int_{-\infty}^{\infty}e^{-w^{2}}dw,$
+which is equivalent to $I=2\int_{0}^{\infty}e^{-w^{2}}dw$. We can
+find $I$ squared by 
+\begin{align*}
+I^{2} & =\left(2\int_{0}^{\infty}e^{-v^{2}}dv\right)\left(2\int_{0}^{\infty}e^{-w^{2}}dw\right)\\
+ & =4\int_{0}^{\infty}\int_{0}^{\infty}e^{-\left(v^{2}+w^{2}\right)}dvdw.
+\end{align*}
+Let $v=tw\Rightarrow dv=wdt,$ and $I^{2}$ becomes 
+\[
+I^{2}=4\int_{0}^{\infty}\int_{0}^{\infty}e^{-w^{2}\left(t^{2}+1\right)}wdtdw.
+\]
+Note that the domain for $t$ is also $\left(0,\infty\right)$. With
+Fubini's theorem, 
+\begin{align*}
+I^{2} & =4\int_{0}^{\infty}\int_{0}^{\infty}e^{-w^{2}\left(t^{2}+1\right)}wdtdw\\
+ & =4\int_{0}^{\infty}\int_{0}^{\infty}e^{-w^{2}\left(t^{2}+1\right)}wdwdt.
+\end{align*}
+Let $r=-w^{2}\left(t^{2}+1\right)$. After some calculation, we can
+obtain $\int_{0}^{\infty}e^{-w^{2}\left(t^{2}+1\right)}wdw=\frac{1}{2\left(t^{2}+1\right)}$,
+so that 
+\begin{align*}
+I^{2} & =4\int_{0}^{\infty}\int_{0}^{\infty}e^{-w^{2}\left(t^{2}+1\right)}wdwdt\\
+ & =2\int_{0}^{\infty}\frac{1}{\left(t^{2}+1\right)}dt\\
+ & =2\left[\textrm{tan}^{-1}\left(t\right)\right]_{0}^{\infty}\\
+ & =\pi.
+\end{align*}
+
+\noindent (Note that the inverse of tangent is denoted $\textrm{arctan}$
+or $\textrm{tan}^{-1}$.) That is, $I=\int_{-\infty}^{\infty}e^{-w^{2}}dw=\sqrt{\pi}$.
+Therefore, 
+\begin{align*}
+\Gamma\left(\frac{1}{2}\right) & =2\int_{0}^{\infty}e^{-w^{2}}dw\\
+ & =2\left(\frac{\sqrt{\pi}}{2}\right)\\
+ & =\sqrt{\pi}.
+\end{align*}
+
+With the recurrence formula, $n\Gamma\left(n\right)=\Gamma\left(n+1\right)$,
+we can find 
+\begin{align*}
+\Gamma\left(\frac{3}{2}\right) & =\frac{1}{2}\Gamma\left(\frac{1}{2}\right)=\frac{\sqrt{\pi}}{2}\\
+\Gamma\left(\frac{5}{2}\right) & =\frac{3}{2}\Gamma\left(\frac{3}{2}\right)=\frac{3\sqrt{\pi}}{4}\\
+ & \vdots\\
+\Gamma\left(n+\frac{1}{2}\right) & =\frac{1\cdot3\cdot5\cdots\left(2n-1\right)}{2^{n}}\sqrt{\pi},
+\end{align*}
+where $n=1,2,3,\cdots$.
+
+\begin{doublespace}
+\noindent \textbf{Lab: Calculating the Wallis Product}
+\end{doublespace}
+
+\begin{doublespace}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{rm}\hlstd{(}\hlkwc{list}\hlstd{=}\hlkwd{ls}\hlstd{())}
+
+\hlstd{pp} \hlkwb{=} \hlnum{0}
+\hlstd{n} \hlkwb{=} \hlnum{10}\hlopt{^}\hlnum{7}
+\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{n)\{}
+    \hlstd{p} \hlkwb{=} \hlnum{2}\hlopt{*}\hlkwd{log}\hlstd{(}\hlnum{2}\hlopt{*}\hlstd{i)} \hlopt{-} \hlkwd{log}\hlstd{(}\hlnum{2}\hlopt{*}\hlstd{i}\hlopt{-}\hlnum{1}\hlstd{)} \hlopt{-} \hlkwd{log}\hlstd{(}\hlnum{2}\hlopt{*}\hlstd{i}\hlopt{+}\hlnum{1}\hlstd{)}
+    \hlstd{pp} \hlkwb{=} \hlstd{p} \hlopt{+} \hlstd{pp}
+\hlstd{\}}
+\hlnum{2}\hlopt{*}\hlstd{(}\hlkwd{exp}\hlstd{(}\hlnum{1}\hlstd{)}\hlopt{^}\hlstd{pp)} \hlcom{# exp(1)^pp is pi/2}
+\end{alltt}
+\begin{verbatim}
+## [1] 3.141593
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{doublespace}
+
+\begin{doublespace}
+\noindent \textbf{Lab: Gamma and Beta Functions}
+\end{doublespace}
+
+\begin{doublespace}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{rm}\hlstd{(}\hlkwc{list}\hlstd{=}\hlkwd{ls}\hlstd{())}
+
+\hlcom{#################}
+\hlcom{# gamma(n+1)=n! #}
+\hlcom{#################}
+\hlkwd{gamma}\hlstd{(}\hlnum{9}\hlopt{+}\hlnum{1}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 362880
+\end{verbatim}
+\begin{alltt}
+\hlkwd{factorial}\hlstd{(}\hlnum{9}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 362880
+\end{verbatim}
+\begin{alltt}
+\hlcom{# gamma(-1) # NaN produced}
+\hlcom{# factorial(-2) # NaN produced}
+
+\hlcom{#######################}
+\hlcom{# gamma(0.5)=sqrt(pi) #}
+\hlcom{#######################}
+\hlkwd{gamma}\hlstd{(}\hlnum{0.5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.772454
+\end{verbatim}
+\begin{alltt}
+\hlkwd{sqrt}\hlstd{(pi)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.772454
+\end{verbatim}
+\begin{alltt}
+\hlcom{###################}
+\hlcom{# beta from gamma #}
+\hlcom{###################}
+\hlkwd{beta}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.03333333
+\end{verbatim}
+\begin{alltt}
+\hlkwd{gamma}\hlstd{(}\hlnum{2}\hlstd{)}\hlopt{*}\hlkwd{gamma}\hlstd{(}\hlnum{5}\hlstd{)}\hlopt{/}\hlkwd{gamma}\hlstd{(}\hlnum{2}\hlopt{+}\hlnum{5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.03333333
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{doublespace}
+
+\section{Stirling's Formula}
+
+\noindent In equation (\ref{eq:2}), let $u=x-n$, so that $du=dx$.
+As the domain of $x$ is $\left(0,\infty\right)$, the domain of $u$
+is $\left(0-n,\infty-n\right)=\left(-n,\infty\right)$. Then $\int_{0}^{\infty}x^{n}e^{-x}dx$
+becomes 
+\begin{align}
+\int_{0}^{\infty}x^{n}e^{-x}dx & =\int_{-n}^{\infty}\left(u+n\right)^{n}e^{-\left(u+n\right)}du\nonumber \\
+ & =\int_{-n}^{\infty}n^{n}\left(1+\frac{u}{n}\right)^{n}e^{-u}e^{-n}du\nonumber \\
+ & =\frac{1}{e^{n}}\int_{-n}^{\infty}n^{n}\left(1+\frac{u}{n}\right)^{n}e^{-u}e^{-n}e^{n}du\nonumber \\
+ & =\frac{n^{n}}{e^{n}}\int_{-n}^{\infty}\left(1+\frac{u}{n}\right)^{n}e^{-u}du.\label{eq:3}
+\end{align}
+
+We can expand $\left(1+\frac{u}{n}\right)^{n}$ by taking logarithm
+and then exponentiating it. Taking logarithm, we have $\textrm{log}\left(1+\frac{u}{n}\right)^{n}=n\textrm{log}\left(1+\frac{u}{n}\right)$.
+Using Maclaurin's series to expand the logarithm, we obtain
+\[
+\textrm{log}\left(1+\frac{u}{n}\right)\approx\frac{u}{n}-\frac{u^{2}}{2n^{2}}.
+\]
+Therefore,
+\begin{align*}
+\textrm{log}\left(1+\frac{u}{n}\right)^{n}=n\textrm{log}\left(1+\frac{u}{n}\right) & \approx u-\frac{u^{2}}{2n},
+\end{align*}
+which suggests that
+\[
+\left(1+\frac{u}{n}\right)^{n}=e^{\textrm{log}\left(1+\frac{u}{n}\right)^{n}}\approx e^{u-\frac{u^{2}}{2n}}.
+\]
+The integral in expression (\ref{eq:3}) becomes
+\begin{align*}
+\frac{n^{n}}{e^{n}}\int_{-n}^{\infty}\left(1+\frac{u}{n}\right)^{n}e^{-u}du & \approx\frac{n^{n}}{e^{n}}\int_{-n}^{\infty}e^{u-\frac{u^{2}}{2n}-u}du\\
+ & =\frac{n^{n}}{e^{n}}\int_{-n}^{\infty}e^{-\frac{u^{2}}{2n}}du.
+\end{align*}
+
+\noindent Since $\int_{-\infty}^{\infty}e^{-w^{2}}dw=\sqrt{\pi}$,
+we have $\int_{-\infty}^{\infty}e^{-\frac{u^{2}}{2n}}du=\sqrt{2\pi n}$.
+Therefore, as $n\rightarrow\infty$, $\int_{-n}^{\infty}e^{-\frac{u^{2}}{2n}}du\rightarrow\sqrt{2\pi n}.$
+Finally, the factorial of a non-negative integer $n$ can be approached
+by the following formula,
+\begin{align*}
+n! & =\int_{0}^{\infty}x^{n}e^{-x}dx\\
+ & \approx n^{n}e^{-n}\int_{0}^{\infty}e^{-\frac{\left(x-n\right)^{2}}{2n}}dx\\
+ & =\left(\frac{n}{e}\right)^{n}\sqrt{2\pi n}.
+\end{align*}
+This formula is named after James Stirling, although a related but
+less precise result was first stated by Abraham de Moivre.
+
+\noindent \textbf{Lab: Stirling's Formula}
+
+\begin{doublespace}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{rm}\hlstd{(}\hlkwc{list}\hlstd{=}\hlkwd{ls}\hlstd{())}
+
+\hlcom{##################}
+\hlcom{# factorial plot #}
+\hlcom{##################}
+\hlstd{n} \hlkwb{=} \hlnum{10}
+\hlstd{x} \hlkwb{=} \hlkwd{c}\hlstd{(}\hlnum{1}\hlopt{:}\hlstd{n)}
+\hlstd{y} \hlkwb{=} \hlkwd{log}\hlstd{(}\hlkwd{factorial}\hlstd{(}\hlnum{1}\hlopt{:}\hlstd{n))}
+\hlkwd{plot}\hlstd{(x, y,} \hlkwc{xlab}\hlstd{=}\hlstr{"n"}\hlstd{,} \hlkwc{ylab}\hlstd{=}\hlstr{"log n!"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-4-1} 
+\begin{kframe}\begin{alltt}
+\hlcom{#############################}
+\hlcom{# Stirling's formula for n! #}
+\hlcom{#############################}
+\hlstd{i} \hlkwb{=} \hlnum{19}
+\hlstd{stir} \hlkwb{=} \hlkwd{rep}\hlstd{(}\hlnum{NA}\hlstd{, i)}
+\hlkwa{for} \hlstd{(n} \hlkwa{in} \hlnum{0}\hlopt{:}\hlstd{i)\{}
+    \hlstd{stir[n}\hlopt{+}\hlnum{1}\hlstd{]} \hlkwb{=} \hlstd{((n}\hlopt{/}\hlkwd{exp}\hlstd{(}\hlnum{1}\hlstd{))}\hlopt{^}\hlstd{n)}\hlopt{*}\hlkwd{sqrt}\hlstd{(}\hlnum{2}\hlopt{*}\hlstd{pi}\hlopt{*}\hlstd{n)}
+    \hlcom{#stir}
+\hlstd{\}}
+\hlkwd{options}\hlstd{(}\hlkwc{scipen}\hlstd{=}\hlnum{999}\hlstd{)}
+\hlcom{#stir}
+
+\hlcom{#############}
+\hlcom{# actual n! #}
+\hlcom{#############}
+\hlstd{j} \hlkwb{=} \hlnum{19}
+\hlstd{facc} \hlkwb{=} \hlkwd{rep}\hlstd{(}\hlnum{NA}\hlstd{, i)}
+\hlkwa{for} \hlstd{(m} \hlkwa{in} \hlnum{0}\hlopt{:}\hlstd{j)\{}
+    \hlstd{facc[m}\hlopt{+}\hlnum{1}\hlstd{]} \hlkwb{=} \hlkwd{factorial}\hlstd{(m)}
+    \hlcom{#facc}
+\hlstd{\}}
+\hlkwd{options}\hlstd{(}\hlkwc{scipen}\hlstd{=}\hlnum{999}\hlstd{)}
+\hlcom{#facc}
+
+\hlcom{############}
+\hlcom{# accuracy #}
+\hlcom{############}
+\hlnum{1} \hlopt{-} \hlstd{(facc}\hlopt{-}\hlstd{stir)}\hlopt{/}\hlstd{facc}
+\end{alltt}
+\begin{verbatim}
+##  [1] 0.0000000 0.9221370 0.9595022 0.9727016 0.9794240 0.9834931 0.9862197
+##  [8] 0.9881738 0.9896427 0.9907872 0.9917040 0.9924549 0.9930812 0.9936115
+## [15] 0.9940663 0.9944607 0.9948059 0.9951106 0.9953815 0.9956240
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{doublespace}
+
+\end{document}
